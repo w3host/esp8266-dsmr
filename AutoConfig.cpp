@@ -148,6 +148,164 @@ void AutoConfig::SendConfig()
     _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/power_tariff/config", &mqttPayload[0], false);
     autoconfPayload.clear();
 
+    // Custom stuff here
+    if (AUTOCONFIG_CUSTOM_POWER_EXTENDED)
+    {
+        // total_consumption
+        autoconfPayload["device"] = device.as<JsonObject>();
+        autoconfPayload["availability_topic"] = _identifier + "/power/total_consumption/status";
+        autoconfPayload["state_topic"] = _identifier + "/power/total_consumption";
+        autoconfPayload["last_reset_topic"] = _identifier + "/power/total_consumption/reset";
+        autoconfPayload["name"] = _identifier + "_total_consumption";
+        autoconfPayload["unit_of_measurement"] = "kWh";
+        autoconfPayload["unique_id"] = "total_consumption";
+        autoconfPayload["icon"] = "mdi:counter";
+        autoconfPayload["device_class"] = "energy";
+        autoconfPayload["state_class"] = "measurement";
+        autoconfPayload["last_reset_value_template"] = "1970-01-01T00:00:00+00:00";
+        serializeJson(autoconfPayload, mqttPayload);
+        _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/total_consumption/config", &mqttPayload[0], false);
+        autoconfPayload.clear();
+
+        // total_production
+        autoconfPayload["device"] = device.as<JsonObject>();
+        autoconfPayload["availability_topic"] = _identifier + "/power/total_production/status";
+        autoconfPayload["state_topic"] = _identifier + "/power/total_production";
+        autoconfPayload["last_reset_topic"] = _identifier + "/power/total_production/reset";
+        autoconfPayload["name"] = _identifier + "_total_production";
+        autoconfPayload["unit_of_measurement"] = "kWh";
+        autoconfPayload["unique_id"] = "total_production";
+        autoconfPayload["icon"] = "mdi:counter";
+        autoconfPayload["device_class"] = "energy";
+        autoconfPayload["state_class"] = "measurement";
+        autoconfPayload["last_reset_value_template"] = "1970-01-01T00:00:00+00:00";
+        serializeJson(autoconfPayload, mqttPayload);
+        _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/total_production/config", &mqttPayload[0], false);
+        autoconfPayload.clear();
+
+        // total_reactive_consumption
+        autoconfPayload["device"] = device.as<JsonObject>();
+        autoconfPayload["availability_topic"] = _identifier + "/power/total_reactive_consumption/status";
+        autoconfPayload["state_topic"] = _identifier + "/power/total_reactive_consumption";
+        autoconfPayload["last_reset_topic"] = _identifier + "/power/total_reactive_consumption/reset";
+        autoconfPayload["name"] = _identifier + "_total_reactive_consumption";
+        autoconfPayload["unit_of_measurement"] = "kWh";
+        autoconfPayload["unique_id"] = "total_reactive_consumption";
+        autoconfPayload["icon"] = "mdi:counter";
+        autoconfPayload["device_class"] = "energy";
+        autoconfPayload["state_class"] = "measurement";
+        autoconfPayload["last_reset_value_template"] = "1970-01-01T00:00:00+00:00";
+        serializeJson(autoconfPayload, mqttPayload);
+        _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/total_reactive_consumption/config", &mqttPayload[0], false);
+        autoconfPayload.clear();
+
+        // total_reactive_production
+        autoconfPayload["device"] = device.as<JsonObject>();
+        autoconfPayload["availability_topic"] = _identifier + "/power/total_reactive_production/status";
+        autoconfPayload["state_topic"] = _identifier + "/power/total_reactive_production";
+        autoconfPayload["last_reset_topic"] = _identifier + "/power/total_reactive_production/reset";
+        autoconfPayload["name"] = _identifier + "_total_reactive_production";
+        autoconfPayload["unit_of_measurement"] = "kWh";
+        autoconfPayload["unique_id"] = "total_reactive_production";
+        autoconfPayload["icon"] = "mdi:counter";
+        autoconfPayload["device_class"] = "energy";
+        autoconfPayload["state_class"] = "measurement";
+        autoconfPayload["last_reset_value_template"] = "1970-01-01T00:00:00+00:00";
+        serializeJson(autoconfPayload, mqttPayload);
+        _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/total_reactive_production/config", &mqttPayload[0], false);
+        autoconfPayload.clear();
+
+        // instantaneous current phase 1
+        autoconfPayload["device"] = device.as<JsonObject>();
+        autoconfPayload["availability_topic"] = _identifier + "/power/phase_1/instantaneous_current/status";
+        autoconfPayload["state_topic"] = _identifier + "/power/phase_1/instantaneous_current";
+        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_1/instantaneous_current/reset";
+        autoconfPayload["name"] = _identifier + "_phase_1_instantaneous_current";
+        autoconfPayload["unit_of_measurement"] = "A";
+        autoconfPayload["unique_id"] = "phase_1_instantaneous_current";
+        autoconfPayload["icon"] = "mdi:flash";
+        autoconfPayload["device_class"] = "current";
+        autoconfPayload["state_class"] = "measurement";
+        serializeJson(autoconfPayload, mqttPayload);
+        _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/phase_1_instantaneous_current/config", &mqttPayload[0], false);
+        autoconfPayload.clear();
+
+        // instantaneous current phase 2
+        autoconfPayload["device"] = device.as<JsonObject>();
+        autoconfPayload["availability_topic"] = _identifier + "/power/phase_2/instantaneous_current/status";
+        autoconfPayload["state_topic"] = _identifier + "/power/phase_2/instantaneous_current";
+        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_2/instantaneous_current/reset";
+        autoconfPayload["name"] = _identifier + "_phase_2_instantaneous_current";
+        autoconfPayload["unit_of_measurement"] = "A";
+        autoconfPayload["unique_id"] = "phase_2_instantaneous_current";
+        autoconfPayload["icon"] = "mdi:flash";
+        autoconfPayload["device_class"] = "current";
+        autoconfPayload["state_class"] = "measurement";
+        serializeJson(autoconfPayload, mqttPayload);
+        _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/phase_2_instantaneous_current/config", &mqttPayload[0], false);
+        autoconfPayload.clear();
+
+        // instantaneous current phase 3
+        autoconfPayload["device"] = device.as<JsonObject>();
+        autoconfPayload["availability_topic"] = _identifier + "/power/phase_3/instantaneous_current/status";
+        autoconfPayload["state_topic"] = _identifier + "/power/phase_3/instantaneous_current";
+        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_3/instantaneous_current/reset";
+        autoconfPayload["name"] = _identifier + "_phase_3_instantaneous_current";
+        autoconfPayload["unit_of_measurement"] = "A";
+        autoconfPayload["unique_id"] = "phase_3_instantaneous_current";
+        autoconfPayload["icon"] = "mdi:flash";
+        autoconfPayload["device_class"] = "current";
+        autoconfPayload["state_class"] = "measurement";
+        serializeJson(autoconfPayload, mqttPayload);
+        _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/phase_3_instantaneous_current/config", &mqttPayload[0], false);
+        autoconfPayload.clear();
+
+        // instantaneous voltage phase 1
+        autoconfPayload["device"] = device.as<JsonObject>();
+        autoconfPayload["availability_topic"] = _identifier + "/power/phase_1/instantaneous_voltage/status";
+        autoconfPayload["state_topic"] = _identifier + "/power/phase_1/instantaneous_voltage";
+        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_1/instantaneous_voltage/reset";
+        autoconfPayload["name"] = _identifier + "_phase_1_instantaneous_voltage";
+        autoconfPayload["unit_of_measurement"] = "V";
+        autoconfPayload["unique_id"] = "phase_1_instantaneous_voltage";
+        autoconfPayload["icon"] = "mdi:flash";
+        autoconfPayload["device_class"] = "voltage";
+        autoconfPayload["state_class"] = "measurement";
+        serializeJson(autoconfPayload, mqttPayload);
+        _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/phase_1_instantaneous_voltage/config", &mqttPayload[0], false);
+        autoconfPayload.clear();
+
+        // instantaneous voltage phase 2
+        autoconfPayload["device"] = device.as<JsonObject>();
+        autoconfPayload["availability_topic"] = _identifier + "/power/phase_2/instantaneous_voltage/status";
+        autoconfPayload["state_topic"] = _identifier + "/power/phase_2/instantaneous_voltage";
+        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_2/instantaneous_voltage/reset";
+        autoconfPayload["name"] = _identifier + "_phase_2_instantaneous_voltage";
+        autoconfPayload["unit_of_measurement"] = "V";
+        autoconfPayload["unique_id"] = "phase_2_instantaneous_voltage";
+        autoconfPayload["icon"] = "mdi:flash";
+        autoconfPayload["device_class"] = "voltage";
+        autoconfPayload["state_class"] = "measurement";
+        serializeJson(autoconfPayload, mqttPayload);
+        _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/phase_2_instantaneous_voltage/config", &mqttPayload[0], false);
+        autoconfPayload.clear();
+
+        // instantaneous voltage phase 3
+        autoconfPayload["device"] = device.as<JsonObject>();
+        autoconfPayload["availability_topic"] = _identifier + "/power/phase_3/instantaneous_voltage/status";
+        autoconfPayload["state_topic"] = _identifier + "/power/phase_3/instantaneous_voltage";
+        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_3/instantaneous_voltage/reset";
+        autoconfPayload["name"] = _identifier + "_phase_3_instantaneous_voltage";
+        autoconfPayload["unit_of_measurement"] = "V";
+        autoconfPayload["unique_id"] = "phase_3_instantaneous_voltage";
+        autoconfPayload["icon"] = "mdi:flash";
+        autoconfPayload["device_class"] = "voltage";
+        autoconfPayload["state_class"] = "measurement";
+        serializeJson(autoconfPayload, mqttPayload);
+        _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/phase_3_instantaneous_voltage/config", &mqttPayload[0], false);
+        autoconfPayload.clear();
+    }
+
     // Extra stuff here
     if (AUTOCONFIG_POWER_EXTENDED)
     {
