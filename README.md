@@ -1,3 +1,8 @@
+# Thanks!
+
+This repo is completely forked from [bram2202](https://github.com/bram2202/esp8266-dsmr). Thanks for it! <br/>
+I have just updated with NEW OBIS codes for SanxingSX6x1 smart meter using in Hungary (E.ON).
+
 # esp8266-dsmr
 
 A ESP8266 based DSMR reader, posting messages onto MQTT.<br/>
