@@ -41,13 +41,12 @@ void AutoConfig::SendConfig()
     device["manufacturer"] = "Bram2202";
     device["model"] = "ESP-DSMR";
     device["name"] = _identifier;
-    device["sw_version"] = "v1.3.1";
+    device["sw_version"] = "v1.3.1_u3";
 
     // power_consumption
     autoconfPayload["device"] = device.as<JsonObject>();
     autoconfPayload["availability_topic"] = _identifier + "/power/consumption/status";
     autoconfPayload["state_topic"] = _identifier + "/power/consumption";
-    autoconfPayload["last_reset_topic"] = _identifier + "/power/consumption/reset";
     autoconfPayload["name"] = _identifier + "_power_consumption";
     autoconfPayload["unit_of_measurement"] = "kW";
     autoconfPayload["unique_id"] = "power_consumption";
@@ -62,14 +61,12 @@ void AutoConfig::SendConfig()
     autoconfPayload["device"] = device.as<JsonObject>();
     autoconfPayload["availability_topic"] = _identifier + "/power/production/status";
     autoconfPayload["state_topic"] = _identifier + "/power/production";
-    autoconfPayload["last_reset_topic"] = _identifier + "/power/production/reset";
     autoconfPayload["name"] = _identifier + "_power_production";
     autoconfPayload["unit_of_measurement"] = "kW";
     autoconfPayload["unique_id"] = "power_production";
     autoconfPayload["icon"] = "mdi:flash";
     autoconfPayload["device_class"] = "power";
     autoconfPayload["state_class"] = "measurement";
-    autoconfPayload["last_reset_value_template"] = "1970-01-01T00:00:00+00:00";
     serializeJson(autoconfPayload, mqttPayload);
     _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/power_production/config", &mqttPayload[0], false);
     autoconfPayload.clear();
@@ -78,14 +75,12 @@ void AutoConfig::SendConfig()
     autoconfPayload["device"] = device.as<JsonObject>();
     autoconfPayload["availability_topic"] = _identifier + "/power/total_consumption_tariff_1/status";
     autoconfPayload["state_topic"] = _identifier + "/power/total_consumption_tariff_1";
-    autoconfPayload["last_reset_topic"] = _identifier + "/power/total_consumption_tariff_1/reset";
     autoconfPayload["name"] = _identifier + "_total_consumption_tariff_1";
     autoconfPayload["unit_of_measurement"] = "kWh";
     autoconfPayload["unique_id"] = "total_consumption_tariff_1";
     autoconfPayload["icon"] = "mdi:counter";
     autoconfPayload["device_class"] = "energy";
-    autoconfPayload["state_class"] = "measurement";
-    autoconfPayload["last_reset_value_template"] = "1970-01-01T00:00:00+00:00";
+    autoconfPayload["state_class"] = "total_increasing";
     serializeJson(autoconfPayload, mqttPayload);
     _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/total_consumption_tariff_1/config", &mqttPayload[0], false);
     autoconfPayload.clear();
@@ -94,14 +89,12 @@ void AutoConfig::SendConfig()
     autoconfPayload["device"] = device.as<JsonObject>();
     autoconfPayload["availability_topic"] = _identifier + "/power/total_consumption_tariff_2/status";
     autoconfPayload["state_topic"] = _identifier + "/power/total_consumption_tariff_2";
-    autoconfPayload["last_reset_topic"] = _identifier + "/power/total_consumption_tariff_2/reset";
     autoconfPayload["name"] = _identifier + "_total_consumption_tariff_2";
     autoconfPayload["unit_of_measurement"] = "kWh";
     autoconfPayload["unique_id"] = "total_consumption_tariff_2";
     autoconfPayload["icon"] = "mdi:counter";
     autoconfPayload["device_class"] = "energy";
-    autoconfPayload["state_class"] = "measurement";
-    autoconfPayload["last_reset_value_template"] = "1970-01-01T00:00:00+00:00";
+    autoconfPayload["state_class"] = "total_increasing";
     serializeJson(autoconfPayload, mqttPayload);
     _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/total_consumption_tariff_2/config", &mqttPayload[0], false);
     autoconfPayload.clear();
@@ -110,14 +103,12 @@ void AutoConfig::SendConfig()
     autoconfPayload["device"] = device.as<JsonObject>();
     autoconfPayload["availability_topic"] = _identifier + "/power/total_production_tariff_1/status";
     autoconfPayload["state_topic"] = _identifier + "/power/total_production_tariff_1";
-    autoconfPayload["last_reset_topic"] = _identifier + "/power/total_production_tariff_1/reset";
     autoconfPayload["name"] = _identifier + "_total_production_tariff_1";
     autoconfPayload["unit_of_measurement"] = "kWh";
     autoconfPayload["unique_id"] = "total_production_tariff_1";
     autoconfPayload["icon"] = "mdi:counter";
     autoconfPayload["device_class"] = "energy";
-    autoconfPayload["state_class"] = "measurement";
-    autoconfPayload["last_reset_value_template"] = "1970-01-01T00:00:00+00:00";
+    autoconfPayload["state_class"] = "total_increasing";
     serializeJson(autoconfPayload, mqttPayload);
     _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/total_production_tariff_1/config", &mqttPayload[0], false);
     autoconfPayload.clear();
@@ -126,14 +117,12 @@ void AutoConfig::SendConfig()
     autoconfPayload["device"] = device.as<JsonObject>();
     autoconfPayload["availability_topic"] = _identifier + "/power/total_production_tariff_2/status";
     autoconfPayload["state_topic"] = _identifier + "/power/total_production_tariff_2";
-    autoconfPayload["last_reset_topic"] = _identifier + "/power/total_production_tariff_2/reset";
     autoconfPayload["name"] = _identifier + "_total_production_tariff_2";
     autoconfPayload["unit_of_measurement"] = "kWh";
     autoconfPayload["unique_id"] = "total_production_tariff_2";
     autoconfPayload["icon"] = "mdi:counter";
     autoconfPayload["device_class"] = "energy";
-    autoconfPayload["state_class"] = "measurement";
-    autoconfPayload["last_reset_value_template"] = "1970-01-01T00:00:00+00:00";
+    autoconfPayload["state_class"] = "total_increasing";
     serializeJson(autoconfPayload, mqttPayload);
     _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/total_production_tariff_2/config", &mqttPayload[0], false);
     autoconfPayload.clear();
@@ -155,14 +144,12 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/total_consumption/status";
         autoconfPayload["state_topic"] = _identifier + "/power/total_consumption";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/total_consumption/reset";
         autoconfPayload["name"] = _identifier + "_total_consumption";
         autoconfPayload["unit_of_measurement"] = "kWh";
         autoconfPayload["unique_id"] = "total_consumption";
         autoconfPayload["icon"] = "mdi:counter";
         autoconfPayload["device_class"] = "energy";
-        autoconfPayload["state_class"] = "measurement";
-        autoconfPayload["last_reset_value_template"] = "1970-01-01T00:00:00+00:00";
+        autoconfPayload["state_class"] = "total_increasing";
         serializeJson(autoconfPayload, mqttPayload);
         _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/total_consumption/config", &mqttPayload[0], false);
         autoconfPayload.clear();
@@ -171,14 +158,12 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/total_production/status";
         autoconfPayload["state_topic"] = _identifier + "/power/total_production";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/total_production/reset";
         autoconfPayload["name"] = _identifier + "_total_production";
         autoconfPayload["unit_of_measurement"] = "kWh";
         autoconfPayload["unique_id"] = "total_production";
         autoconfPayload["icon"] = "mdi:counter";
         autoconfPayload["device_class"] = "energy";
-        autoconfPayload["state_class"] = "measurement";
-        autoconfPayload["last_reset_value_template"] = "1970-01-01T00:00:00+00:00";
+        autoconfPayload["state_class"] = "total_increasing";
         serializeJson(autoconfPayload, mqttPayload);
         _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/total_production/config", &mqttPayload[0], false);
         autoconfPayload.clear();
@@ -187,14 +172,12 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/total_reactive_consumption/status";
         autoconfPayload["state_topic"] = _identifier + "/power/total_reactive_consumption";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/total_reactive_consumption/reset";
         autoconfPayload["name"] = _identifier + "_total_reactive_consumption";
         autoconfPayload["unit_of_measurement"] = "kWh";
         autoconfPayload["unique_id"] = "total_reactive_consumption";
         autoconfPayload["icon"] = "mdi:counter";
         autoconfPayload["device_class"] = "energy";
-        autoconfPayload["state_class"] = "measurement";
-        autoconfPayload["last_reset_value_template"] = "1970-01-01T00:00:00+00:00";
+        autoconfPayload["state_class"] = "total_increasing";
         serializeJson(autoconfPayload, mqttPayload);
         _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/total_reactive_consumption/config", &mqttPayload[0], false);
         autoconfPayload.clear();
@@ -203,14 +186,12 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/total_reactive_production/status";
         autoconfPayload["state_topic"] = _identifier + "/power/total_reactive_production";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/total_reactive_production/reset";
         autoconfPayload["name"] = _identifier + "_total_reactive_production";
         autoconfPayload["unit_of_measurement"] = "kWh";
         autoconfPayload["unique_id"] = "total_reactive_production";
         autoconfPayload["icon"] = "mdi:counter";
         autoconfPayload["device_class"] = "energy";
-        autoconfPayload["state_class"] = "measurement";
-        autoconfPayload["last_reset_value_template"] = "1970-01-01T00:00:00+00:00";
+        autoconfPayload["state_class"] = "total_increasing";
         serializeJson(autoconfPayload, mqttPayload);
         _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/total_reactive_production/config", &mqttPayload[0], false);
         autoconfPayload.clear();
@@ -219,7 +200,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_1/instantaneous_current/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_1/instantaneous_current";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_1/instantaneous_current/reset";
         autoconfPayload["name"] = _identifier + "_phase_1_instantaneous_current";
         autoconfPayload["unit_of_measurement"] = "A";
         autoconfPayload["unique_id"] = "phase_1_instantaneous_current";
@@ -234,7 +214,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_2/instantaneous_current/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_2/instantaneous_current";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_2/instantaneous_current/reset";
         autoconfPayload["name"] = _identifier + "_phase_2_instantaneous_current";
         autoconfPayload["unit_of_measurement"] = "A";
         autoconfPayload["unique_id"] = "phase_2_instantaneous_current";
@@ -249,7 +228,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_3/instantaneous_current/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_3/instantaneous_current";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_3/instantaneous_current/reset";
         autoconfPayload["name"] = _identifier + "_phase_3_instantaneous_current";
         autoconfPayload["unit_of_measurement"] = "A";
         autoconfPayload["unique_id"] = "phase_3_instantaneous_current";
@@ -264,7 +242,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_1/instantaneous_voltage/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_1/instantaneous_voltage";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_1/instantaneous_voltage/reset";
         autoconfPayload["name"] = _identifier + "_phase_1_instantaneous_voltage";
         autoconfPayload["unit_of_measurement"] = "V";
         autoconfPayload["unique_id"] = "phase_1_instantaneous_voltage";
@@ -279,7 +256,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_2/instantaneous_voltage/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_2/instantaneous_voltage";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_2/instantaneous_voltage/reset";
         autoconfPayload["name"] = _identifier + "_phase_2_instantaneous_voltage";
         autoconfPayload["unit_of_measurement"] = "V";
         autoconfPayload["unique_id"] = "phase_2_instantaneous_voltage";
@@ -294,7 +270,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_3/instantaneous_voltage/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_3/instantaneous_voltage";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_3/instantaneous_voltage/reset";
         autoconfPayload["name"] = _identifier + "_phase_3_instantaneous_voltage";
         autoconfPayload["unit_of_measurement"] = "V";
         autoconfPayload["unique_id"] = "phase_3_instantaneous_voltage";
@@ -313,7 +288,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/short_power_outages/status";
         autoconfPayload["state_topic"] = _identifier + "/power/short_power_outages";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/short_power_outages/reset";
         autoconfPayload["name"] = _identifier + "_short_power_outages";
         autoconfPayload["unique_id"] = "short_power_outages";
         autoconfPayload["icon"] = "mdi:flash-off";
@@ -325,7 +299,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/long_power_outages/status";
         autoconfPayload["state_topic"] = _identifier + "/power/long_power_outages";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/long_power_outages/reset";
         autoconfPayload["name"] = _identifier + "_long_power_outages";
         autoconfPayload["unique_id"] = "long_power_outages";
         autoconfPayload["icon"] = "mdi:flash-off";
@@ -337,7 +310,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_1/current/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_1/current";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_1/current/reset";
         autoconfPayload["name"] = _identifier + "_phase_1_current";
         autoconfPayload["unit_of_measurement"] = "A";
         autoconfPayload["unique_id"] = "phase_1_current";
@@ -352,7 +324,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_2/current/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_2/current";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_2/current/reset";
         autoconfPayload["name"] = _identifier + "_phase_2_current";
         autoconfPayload["unit_of_measurement"] = "A";
         autoconfPayload["unique_id"] = "phase_2_current";
@@ -367,7 +338,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_3/current/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_3/current";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_3/current/reset";
         autoconfPayload["name"] = _identifier + "_phase_3_current";
         autoconfPayload["unit_of_measurement"] = "A";
         autoconfPayload["unique_id"] = "phase_3_current";
@@ -382,7 +352,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_1/consumption/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_1/consumption";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_1/consumption/reset";
         autoconfPayload["name"] = _identifier + "_phase_1_consumption";
         autoconfPayload["unit_of_measurement"] = "kW";
         autoconfPayload["unique_id"] = "phase_1_consumption";
@@ -397,7 +366,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_2/consumption/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_2/consumption";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_2/consumption/reset";
         autoconfPayload["name"] = _identifier + "_phase_2_consumption";
         autoconfPayload["unit_of_measurement"] = "kW";
         autoconfPayload["unique_id"] = "phase_2_consumption";
@@ -412,7 +380,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_3/consumption/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_3/consumption";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_3/consumption/reset";
         autoconfPayload["name"] = _identifier + "_phase_3_consumption";
         autoconfPayload["unit_of_measurement"] = "kW";
         autoconfPayload["unique_id"] = "phase_3_consumption";
@@ -427,7 +394,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_1/production/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_1/production";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_1/production/reset";
         autoconfPayload["name"] = _identifier + "_phase_1_production";
         autoconfPayload["unit_of_measurement"] = "kW";
         autoconfPayload["unique_id"] = "phase_1_production";
@@ -442,7 +408,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_2/production/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_2/production";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_2/production/reset";
         autoconfPayload["name"] = _identifier + "_phase_2_production";
         autoconfPayload["unit_of_measurement"] = "kW";
         autoconfPayload["unique_id"] = "phase_2_production";
@@ -457,7 +422,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_3/production/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_3/production";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_3/production/reset";
         autoconfPayload["name"] = _identifier + "_phase_3_production";
         autoconfPayload["unit_of_measurement"] = "kW";
         autoconfPayload["unique_id"] = "phase_3_production";
@@ -472,7 +436,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_1/drops/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_1/drops";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_1/drops/reset";
         autoconfPayload["name"] = _identifier + "_phase_1_drops";
         autoconfPayload["unique_id"] = "phase_1_drops";
         autoconfPayload["icon"] = "mdi:chart-sankey";
@@ -484,7 +447,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_2/drops/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_2/drops";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_2/drops/reset";
         autoconfPayload["name"] = _identifier + "_phase_2_drops";
         autoconfPayload["unique_id"] = "phase_2_drops";
         autoconfPayload["icon"] = "mdi:chart-sankey";
@@ -496,7 +458,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_3/drops/status";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_3/drops";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_3/drops/reset";
         autoconfPayload["name"] = _identifier + "_phase_3_drops";
         autoconfPayload["unique_id"] = "phase_3_drops";
         autoconfPayload["icon"] = "mdi:chart-sankey";
@@ -508,7 +469,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_1/drops/peaks";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_1/peaks";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_1/peaks/reset";
         autoconfPayload["name"] = _identifier + "_phase_1_peaks";
         autoconfPayload["unique_id"] = "phase_1_peaks";
         autoconfPayload["icon"] = "mdi:chart-bell-curve";
@@ -520,7 +480,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_2/drops/peaks";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_2/peaks";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_2/peaks/reset";
         autoconfPayload["name"] = _identifier + "_phase_2_peaks";
         autoconfPayload["unique_id"] = "phase_2_peaks";
         autoconfPayload["icon"] = "mdi:chart-bell-curve";
@@ -532,7 +491,6 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "/power/phase_3/drops/peaks";
         autoconfPayload["state_topic"] = _identifier + "/power/phase_3/peaks";
-        autoconfPayload["last_reset_topic"] = _identifier + "/power/phase_3/peaks/reset";
         autoconfPayload["name"] = _identifier + "_phase_3_peaks";
         autoconfPayload["unique_id"] = "phase_3_peaks";
         autoconfPayload["icon"] = "mdi:chart-bell-curve";
@@ -547,12 +505,10 @@ void AutoConfig::SendConfig()
         autoconfPayload["device"] = device.as<JsonObject>();
         autoconfPayload["availability_topic"] = _identifier + "gas/total/status";
         autoconfPayload["state_topic"] = _identifier + "gas/total";
-        autoconfPayload["last_reset_topic"] = _identifier + "gas/total/reset";
         autoconfPayload["name"] = _identifier + "_total_gas";
         autoconfPayload["unit_of_measurement"] = "kWh";
         autoconfPayload["unique_id"] = "gas/total";
         autoconfPayload["icon"] = "mdi:counter";
-        autoconfPayload["last_reset_value_template"] = "1970-01-01T00:00:00+00:00";
         serializeJson(autoconfPayload, mqttPayload);
         _mqttPublisher.publish("homeassistant/sensor/" + _identifier + "/gas_total/config", &mqttPayload[0], false);
         autoconfPayload.clear();
